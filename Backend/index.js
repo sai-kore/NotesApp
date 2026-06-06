@@ -78,6 +78,21 @@ app.post("/api/notes", (request, response) => {
   response.json(note);
 });
 
+app.put("/api/notes/:id", (request, response) => {
+  const id = request.params.id;
+  const body = request.body;
+
+  const note = {
+    id,
+    content: body.content,
+    important: body.important,
+  };
+
+  notes = notes.map((n) => (n.id === id ? note : n));
+
+  response.json(note);
+});
+
 app.delete("/api/notes/:id", (request, response) => {
   const id = request.params.id;
   notes = notes.filter((note) => note.id !== id);
